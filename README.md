@@ -1,2 +1,9 @@
 # Juego-Blackjack-en-C-Santiago-Arellano-
-El presente repositorio contiene un approach al juego de Backjack o 21 que desarrollé como proyecto para mi clase de Programacion en C++.  
+
+/**=======================================================================================================================
+ * ?                                                     ABOUT
+ * @author         :  Santiago Arellano
+ * @email          :  santiagofarellanoj@icloud.com
+ * @createdOn      :  27, Abril, 2023 
+ * @description    :  Implementacion de Juego de Blackjack
+ *=======================================================================================================================**/
