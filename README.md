@@ -21,7 +21,7 @@
     - Se trabaja con varios controles de calidad internos para producir un codigo completo
       y facilmente ejectuable, con una interfaz amigable y clases reutilizables.
  2. Known Issues:
-    - Al momento se conoce la necesidad de implementar un neuvo chequeo dentro de la funcion de juego para 
+    - Al momento se conoce la necesidad de implementar un nuevo chequeo dentro de la funcion de juego para 
       asignar un valor de 11 o 1 a la tarjeta As dentro de la ejecucion para el usuario.
     - Al momento se conoce la necesidad de implementar una loop secundaria para anadir tarjetas al dealer hasta que 
       presente un puntaje menor o igual a 17.
