@@ -39,5 +39,6 @@ void Dealer_Class::tomar_cartas_hasta_puntos_mejor_17()
         auto carta_a_anadir = Logica_Engine_Alpha.select_a_card();
         Dealer_Class::anadir_tarjeta_al_usr(carta_a_anadir.Card_Name);
         Dealer_Class::aumentar_cantidad_puntos_usr(carta_a_anadir.Card_Value);
+        puntos_dealer_actuales = Dealer_Class::get_cantidad_puntos();
     }
 }
