@@ -28,7 +28,7 @@
 //! Implementacion del constructor para la clase Base Player
 Base_Player::Base_Player(std::string usr_def_name, std::string usr_def_lname)
 {
-    if ((usr_def_name.length() > 0 and usr_def_lname.length() >0) && (usr_def_name.length() <= 32 and usr_def_lname.length() <= 32))
+    if ((usr_def_name.length() > 0 && usr_def_lname.length() >0) && (usr_def_name.length() <= 32 && usr_def_lname.length() <= 32))
     {
         nombre_usuario = usr_def_name;
         apellido_usuario = usr_def_lname;
@@ -113,7 +113,7 @@ std::string Base_Player::get_nombre_usuario()
 
 void Base_Player::set_nombre_usuario(std::string nombre_usuario_new)
 {
-  if (nombre_usuario_new.length() > 0 and nombre_usuario_new.length() <= 32)
+  if (nombre_usuario_new.length() > 0 && nombre_usuario_new.length() <= 32)
     {
         nombre_usuario = nombre_usuario_new;
     }  
@@ -126,7 +126,7 @@ std::string Base_Player::get_apellido_usuario()
 
 void Base_Player::set_apellido_usuario(std::string apellido_usuario_new)
 {
-    if (apellido_usuario_new.length() > 0 and apellido_usuario_new.length() <= 32)
+    if (apellido_usuario_new.length() > 0 && apellido_usuario_new.length() <= 32)
     {
         apellido_usuario = apellido_usuario_new;
     }
