@@ -42,6 +42,8 @@ class Base_Player
         void aumentar_cantidad_puntos_usr(int cantidad_puntos_usr);
         int get_cantidad_puntos();
         void reset_cantidad_perdida_y_ganada_usr_y_puntos();
+    //! Checkeo numerico para tarjetas as
+        void change_value_aces_based_usr_and_amount();
     //! Definicionde metodos para los valores de texto
         std::string get_nombre_usuario();
         void set_nombre_usuario(std::string nombre_usuario_new);

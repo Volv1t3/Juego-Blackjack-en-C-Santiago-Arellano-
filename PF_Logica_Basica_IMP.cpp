@@ -38,7 +38,7 @@
             {
                 for (int real_value_per_card = 1; real_value_per_card <= amount_cards_per_type; real_value_per_card++)
                 {
-                    if (real_value_per_card == 11 or real_value_per_card == 12 or real_value_per_card == 13)
+                    if (real_value_per_card == 11 || real_value_per_card == 12 || real_value_per_card == 13)
                     {
                         Card_number_real_values_array[index] = 10;
                     }
@@ -211,7 +211,7 @@ bool Logica_Basica::check_if_card_was_used(int card_position, int card_type)
         }
     }
 
-    if( counter_of_occurrences == 4 or Cards_already_played.at(card_position).at(card_type) == 1)
+    if( counter_of_occurrences == 4 || Cards_already_played.at(card_position).at(card_type) == 1)
     {
         return true;
     }

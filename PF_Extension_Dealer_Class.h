@@ -31,6 +31,8 @@ class Dealer_Class : public Base_Player
     public:
     //! Definicion del Constructor heredado para esta clase
         Dealer_Class(std::string usr_def_name, std::string usr_def_lname) : Base_Player(usr_def_name, usr_def_lname) {};
+        void coger_cartas_si_total_menor_17(Logica_Basica& Logica_placeholder);
+        void change_value_aces_based_usr_and_amount();
     private:
     //! Definicion de variables numericas para el control del aspecto economico del juego
         int cantidad_de_victorias = {0};

@@ -59,6 +59,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                 }
             }
         }
+        // Dealer_placeholder.tomar_cartas_hasta_puntos_mejor_17();
     //! Impresion de tarjetas y decision del usuario sobre la partida
         //? Solicitud de apuesta inicial
         double auxiliar_cantidad_apuesta = {0.0};
@@ -73,6 +74,8 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
         Player_placeholder.set_cantidad_apuestas(auxiliar_cantidad_apuesta);
         std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
         //? Impresion de menu subseccion
+        Player_placeholder.change_value_aces_based_usr_and_amount();
+        Dealer_placeholder.change_value_aces_based_usr_and_amount();
         std::cout << "Teniendo en cuenta la informacion presentada\nen la impresion de las tarjetas, Que desea hacer?" << std::endl;
         std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
     //! Vars temporales para evaluar victoria o perdida
@@ -97,20 +100,28 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                     Player_placeholder.aumentar_cantidad_puntos_usr(card_helper.Card_Value);
                     Player_placeholder.imprimir_tarjetas_del_usr(card_auxiliary_counter +1);
                     card_auxiliary_counter += 1;
-
+                    Dealer_placeholder.coger_cartas_si_total_menor_17(Logica_placeholder);
                     //! Check para ver is la cantidad de puntos del usuario luego de anadir la tarjeta no sobrepasa 21
                         //! Variables auxiliares para counters de puntos
                         player_pcounter =  Player_placeholder.get_cantidad_puntos();
                         dealer_pcounter =  Dealer_placeholder.get_cantidad_puntos();
-                        if (player_pcounter > 21 or dealer_pcounter > 21) 
+                        if (player_pcounter > 21 || dealer_pcounter > 21) 
                         {
                             std::cout << std::setw(45) << std::setfill('=') << "|La puntuacion cruzo los 21 puntos|" << std::setw(12) << std::setfill('=') <<"" <<std::endl; 
                             std::cout << std::setw(41) << std::setfill('=') << "|Se pierde por default :C|" << std::setw(16) << std::setfill('=') << "" << std::endl;
-                            if (player_pcounter >= 21)
+                            if (player_pcounter > 21)
                             {
                                 std::cout << std::setw(48) << std::setfill('=') << "|Jugador 1 ha perdido la partida :C|" << std::setw(9) << std::setfill('=') <<  "" <<std::endl;
                                 std::cout << "Puntos Jugador : " << Player_placeholder.get_cantidad_puntos() << std::endl;
                                 Player_placeholder.aumentar_cantidad_perdida_usr(auxiliar_cantidad_apuesta);
+                                result_achieved = true;
+                                break;
+                            }
+                            else if (dealer_pcounter > 21)
+                            {
+                                std::cout << std::setw(45) << std::setfill('=') << "|Dealer ha perdido la partida :D|" << std::setw(12) << std::setfill('=') <<  "" <<std::endl;
+                                //! Impresion de Lineas para el Jugador y el Dealer
+                                std::cout << "Puntos Dealer : " << Dealer_placeholder.get_cantidad_puntos() << std::endl;
                                 result_achieved = true;
                                 break;
                             }
@@ -125,7 +136,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                     dealer_pcounter =  Dealer_placeholder.get_cantidad_puntos();
                     std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
                     std::cout << std::setw(51) << std::setfill('=') << "|Contabilizando las cartas hasta este momento|" << std::setw(6) << std::setfill('=') <<  "" <<std::endl;
-                    if (player_pcounter > 21 or dealer_pcounter > 21) 
+                    if (player_pcounter > 21 || dealer_pcounter > 21) 
                     {
                         std::cout << std::setw(45) << std::setfill('=') << "|La puntuacion cruzo los 21 puntos|" << std::setw(12) << std::setfill('=') <<"" <<std::endl; 
                         std::cout << std::setw(41) << std::setfill('=') << "|Se pierde por default :C|" << std::setw(16) << std::setfill('=') << "" << std::endl;
@@ -147,7 +158,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                             break;
                         }
                     }
-                    else if (player_pcounter <=21 and dealer_pcounter <= 21)
+                    else if (player_pcounter <=21 && dealer_pcounter <= 21)
                     {
                         //! If compuesto para casos especificos de victorias
                         if (player_pcounter == 21)
@@ -256,25 +267,25 @@ void PF_Func_Revisar_sus_Estadisticas(Base_Player& Player_placeholder, Dealer_Cl
         int amount_division = {0};
     
     //! If prinicipal para la impresion de las ganancias
-        if (cantidad_ganada_usr > 0 and cantidad_ganada_usr < 1000)
+        if (cantidad_ganada_usr > 0 && cantidad_ganada_usr < 1000)
         {
             amount_division = 100;
             max_amount_cols_won = cantidad_ganada_usr / amount_division;
             nota_ganancias = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_ganada_usr >= 1000 and cantidad_ganada_usr < 5000) 
+        else if (cantidad_ganada_usr >= 1000 && cantidad_ganada_usr < 5000) 
         {
             amount_division = 500;
             max_amount_cols_won = cantidad_ganada_usr / amount_division;
             nota_ganancias = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_ganada_usr >= 5000 and cantidad_ganada_usr < 10000) 
+        else if (cantidad_ganada_usr >= 5000 && cantidad_ganada_usr < 10000) 
         {
             amount_division = 1000;
             max_amount_cols_won = cantidad_ganada_usr / amount_division;
             nota_ganancias = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_ganada_usr >= 10000 and cantidad_ganada_usr < 50000) 
+        else if (cantidad_ganada_usr >= 10000 && cantidad_ganada_usr < 50000) 
         {
             amount_division = 5000;
             max_amount_cols_won = cantidad_ganada_usr / amount_division;
@@ -288,25 +299,25 @@ void PF_Func_Revisar_sus_Estadisticas(Base_Player& Player_placeholder, Dealer_Cl
         }
 
     //! If Secundario para la impresion de perdidas
-        if (cantidad_perdida_usr > 0 and cantidad_perdida_usr < 1000)
+        if (cantidad_perdida_usr > 0 && cantidad_perdida_usr < 1000)
         {
             amount_division = 100;
             max_amount_cols_lost = cantidad_perdida_usr / amount_division;
             nota_perdidas = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_perdida_usr >= 1000 and cantidad_perdida_usr < 5000) 
+        else if (cantidad_perdida_usr >= 1000 && cantidad_perdida_usr < 5000) 
         {
             amount_division = 500;
             max_amount_cols_lost = cantidad_perdida_usr / amount_division;
             nota_perdidas = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_perdida_usr >= 5000 and cantidad_perdida_usr < 10000) 
+        else if (cantidad_perdida_usr >= 5000 && cantidad_perdida_usr < 10000) 
         {
             amount_division = 1000;
             max_amount_cols_lost = cantidad_perdida_usr / amount_division;
             nota_perdidas = "Nota: Cada estrella simboliza " + std::to_string(amount_division) + " dolares";
         }
-        else if (cantidad_perdida_usr >= 10000 and cantidad_perdida_usr < 50000) 
+        else if (cantidad_perdida_usr >= 10000 && cantidad_perdida_usr < 50000) 
         {
             amount_division = 5000;
             max_amount_cols_lost = cantidad_perdida_usr / amount_division;
@@ -327,7 +338,7 @@ void PF_Func_Revisar_sus_Estadisticas(Base_Player& Player_placeholder, Dealer_Cl
         {
             case 1:
             {
-                if (nota_ganancias == "\b" or max_amount_cols_won == 0) {std::cout << "Cantidad de Dinero Muy pequena o cero" <<std::endl;}
+                if (nota_ganancias == "\b" || max_amount_cols_won == 0) {std::cout << "Cantidad de Dinero Muy pequena o cero" <<std::endl;}
                 else {std::cout << nota_ganancias << std::endl;}
                 std::cout  << std::setw(20) << std::setfill(' ') << "|Dinero Ganado $|";
                 for (std::size_t col = 0; col < max_amount_cols_won; col +=1)
@@ -339,7 +350,7 @@ void PF_Func_Revisar_sus_Estadisticas(Base_Player& Player_placeholder, Dealer_Cl
             }
             case 2:
             {
-                if (nota_perdidas == "\b" or max_amount_cols_lost == 0) {std::cout << "Cantidad de Dinero Muy pequena o cero" <<std::endl;}
+                if (nota_perdidas == "\b" || max_amount_cols_lost == 0) {std::cout << "Cantidad de Dinero Muy pequena o cero" <<std::endl;}
                 else {std::cout << nota_perdidas << std::endl;}
                 std::cout << std::setw(20) << std::setfill(' ')<< "|Dinero Perdidas $|";
                 for (std::size_t col = 0; col < max_amount_cols_lost; col +=1)
