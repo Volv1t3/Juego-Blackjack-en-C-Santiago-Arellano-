@@ -4,7 +4,7 @@
  * @email       : sarellanoj@estud.usfq.edu.ec
  * @uni         : Universidad San Francisco de Quito
  * @clase       : Programacion en C++ y Ejercicios
- * @description : Definicion de la clase extensiva para el dealer, no varia en mucho pero es necesario tenerlo para difulcar el codigo.
+ * @description : Implementacion de la clase Dealer, funcion para contar cartas y generar nuevas
 =============================================**/
 
 
@@ -21,26 +21,62 @@
 #include <random>
 #include <vector>
 #include <algorithm>
-#include "PF_Logica_Basica.h"
+#include "PF_Base_Player_Class.h"
 #include "PF_Extension_Dealer_Class.h"
+#include "PF_Logica_Basica.h"
 
-//! Global Vars para la Logica
-Logica_Basica Logica_Engine_Alpha;
+//! Global Objeto Logica Basica
+Logica_Basica Logic_Object_Dealear_Class;
 
-
-//! Implementacion de funciones 
-
-void Dealer_Class::tomar_cartas_hasta_puntos_mejor_17()
+void Dealer_Class::coger_cartas_si_total_menor_17(Logica_Basica& Logica_placeholder )
 {
-    int puntos_dealer_actuales = Dealer_Class::cantidad_de_puntos;
-    while (puntos_dealer_actuales < 17)
+    //! Calling para el valor de lo puntos
+    auto total_puntos_dealer_h_momento = Dealer_Class::get_cantidad_puntos();
+    //! Generacion de cartas hasta menor de 17
+    do
     {
-        auto carta_a_anadir = Logica_Engine_Alpha.select_a_card();
-        Dealer_Class::anadir_tarjeta_al_usr(carta_a_anadir.Card_Name);
-        Dealer_Class::aumentar_cantidad_puntos_usr(carta_a_anadir.Card_Value);
-        std::cout << "Puntos: " << puntos_dealer_actuales << std::endl;
-        std::cout << "Carta: " << carta_a_anadir.Card_Name << std::endl;
-        std::cout << "Valor: " << carta_a_anadir.Card_Value << std::endl;
-        puntos_dealer_actuales = Dealer_Class::cantidad_de_puntos;
+        auto carta_seleccionada = Logica_placeholder.select_a_card();
+        Dealer_Class::aumentar_cantidad_puntos_usr(carta_seleccionada.Card_Value);
+        Dealer_Class::anadir_tarjeta_al_usr(carta_seleccionada.Card_Name);
+        total_puntos_dealer_h_momento = Dealer_Class::get_cantidad_puntos();
+    }
+    while ((total_puntos_dealer_h_momento < 17));
+}
+
+void Dealer_Class::change_value_aces_based_usr_and_amount()
+{
+    //! Vars ejecucion y encontrar si tiene un as o no
+    bool has_ace = false;
+    for (size_t index = 0; index < tarjetas_del_jugador.size(); index+=1)
+    {
+        if (tarjetas_del_jugador.at(index) == "1 de Corazones Rojos") 
+        {
+            has_ace = true;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Corazones Negros")
+        {   
+            has_ace = true;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Diamantes")
+        {
+            has_ace = true;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Treboles")
+        {
+            has_ace = true;
+        }
+        else {continue;}
+    }
+    //! Cuerpo de decision basado en el puntaje actual
+    if (has_ace == true)
+    {
+        if (cantidad_de_puntos <= 10 && cantidad_de_puntos + 11 <= 21)
+        {
+            cantidad_de_puntos -=1; cantidad_de_victorias += 11;
+        }
+        else if (cantidad_de_puntos > 11 && cantidad_de_victorias + 1 <= 21)
+        {
+            cantidad_de_puntos -=1; cantidad_de_puntos +=1;
+        }
     }
 }

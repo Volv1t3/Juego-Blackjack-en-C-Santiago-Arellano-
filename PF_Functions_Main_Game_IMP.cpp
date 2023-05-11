@@ -74,6 +74,8 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
         Player_placeholder.set_cantidad_apuestas(auxiliar_cantidad_apuesta);
         std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
         //? Impresion de menu subseccion
+        Player_placeholder.change_value_aces_based_usr_and_amount();
+        Dealer_placeholder.change_value_aces_based_usr_and_amount();
         std::cout << "Teniendo en cuenta la informacion presentada\nen la impresion de las tarjetas, Que desea hacer?" << std::endl;
         std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
     //! Vars temporales para evaluar victoria o perdida
@@ -98,7 +100,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                     Player_placeholder.aumentar_cantidad_puntos_usr(card_helper.Card_Value);
                     Player_placeholder.imprimir_tarjetas_del_usr(card_auxiliary_counter +1);
                     card_auxiliary_counter += 1;
-                   
+                    Dealer_placeholder.coger_cartas_si_total_menor_17(Logica_placeholder);
                     //! Check para ver is la cantidad de puntos del usuario luego de anadir la tarjeta no sobrepasa 21
                         //! Variables auxiliares para counters de puntos
                         player_pcounter =  Player_placeholder.get_cantidad_puntos();

@@ -131,7 +131,72 @@ void Base_Player::set_apellido_usuario(std::string apellido_usuario_new)
         apellido_usuario = apellido_usuario_new;
     }
 }
+//! Implementacion de metodo para el manejo de tarjetqas de denotacion as
 
+void Base_Player::change_value_aces_based_usr_and_amount()
+{
+    //! Vars para ejecucion
+    bool has_ace = false;
+    int ace_count = {0};
+    for (size_t index = 0; index < tarjetas_del_jugador.size(); index +=1)
+    {
+        if (tarjetas_del_jugador.at(index) == "1 de Corazones Rojos") 
+        {
+            has_ace = true;
+            ace_count +=1;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Corazones Negros")
+        {   
+            has_ace = true;
+            ace_count +=1;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Diamantes")
+        {
+            has_ace = true;
+            ace_count +=1;
+        }
+        else if (tarjetas_del_jugador.at(index) == "1 de Treboles")
+        {
+            has_ace = true;
+            ace_count +=1;
+        }
+        else {continue;}
+    }
+    
+    //! Conditional operation
+    if (has_ace == true)
+    {
+        std::cout << std::setw(57) << std::setfill('=') <<"" << std::endl;
+        std::cout << std::setw(44) << std::setfill('=') << "|Detectamos un As en sus cartas|" << std::setw(13) << std::setfill('=') <<  "" <<std::endl;
+        std::cout << "Considerando la puntuacion mostrada anteriormente, eliga\nentre una valoracion de 11 o 1" << std::endl;
+        int new_ace_value_usr = {0};
+        bool flag_value = false;
+        for (size_t repetition = 1; repetition <= ace_count ; repetition +=1)
+        {
+            do 
+            {
+                std::cin >> new_ace_value_usr;
+                switch (new_ace_value_usr)
+                {
+                    case 1: 
+                    {
+                        std::cout << "Recibido, mantiendo su As en 1"  << std::endl;
+                        flag_value = true;
+                        break;
+                    }
+                    case 11:
+                    {
+                        std::cout << "Recibido, cambiando el valor de su As a 11"  << std::endl;
+                        cantidad_de_puntos -= 1; cantidad_de_puntos += 11; 
+                        flag_value = true;
+                        break;
+                    }
+                }
+            }
+            while (flag_value == false);
+        }
+    }
+}
 
 //! Definicion de metodos para la adicion e impresion de tarjetas
 
