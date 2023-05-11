@@ -59,6 +59,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                 }
             }
         }
+        // Dealer_placeholder.tomar_cartas_hasta_puntos_mejor_17();
     //! Impresion de tarjetas y decision del usuario sobre la partida
         //? Solicitud de apuesta inicial
         double auxiliar_cantidad_apuesta = {0.0};
@@ -97,7 +98,7 @@ void PF_Func_Jugar_una_Partida(Base_Player& Player_placeholder, Dealer_Class& De
                     Player_placeholder.aumentar_cantidad_puntos_usr(card_helper.Card_Value);
                     Player_placeholder.imprimir_tarjetas_del_usr(card_auxiliary_counter +1);
                     card_auxiliary_counter += 1;
-                    Dealer_placeholder.tomar_cartas_hasta_puntos_mejor_17();
+                   
                     //! Check para ver is la cantidad de puntos del usuario luego de anadir la tarjeta no sobrepasa 21
                         //! Variables auxiliares para counters de puntos
                         player_pcounter =  Player_placeholder.get_cantidad_puntos();

@@ -21,7 +21,6 @@
 #include <random>
 #include <vector>
 #include <algorithm>
-#include "PF_Base_Player_Class.h"
 #include "PF_Logica_Basica.h"
 #include "PF_Extension_Dealer_Class.h"
 
@@ -33,15 +32,15 @@ Logica_Basica Logica_Engine_Alpha;
 
 void Dealer_Class::tomar_cartas_hasta_puntos_mejor_17()
 {
-    int puntos_dealer_actuales = cantidad_de_puntos;
+    int puntos_dealer_actuales = Dealer_Class::cantidad_de_puntos;
     while (puntos_dealer_actuales < 17)
     {
         auto carta_a_anadir = Logica_Engine_Alpha.select_a_card();
-        anadir_tarjeta_al_usr(carta_a_anadir.Card_Name);
-        aumentar_cantidad_puntos_usr(carta_a_anadir.Card_Value);
+        Dealer_Class::anadir_tarjeta_al_usr(carta_a_anadir.Card_Name);
+        Dealer_Class::aumentar_cantidad_puntos_usr(carta_a_anadir.Card_Value);
         std::cout << "Puntos: " << puntos_dealer_actuales << std::endl;
         std::cout << "Carta: " << carta_a_anadir.Card_Name << std::endl;
         std::cout << "Valor: " << carta_a_anadir.Card_Value << std::endl;
-        puntos_dealer_actuales = cantidad_de_puntos;
+        puntos_dealer_actuales = Dealer_Class::cantidad_de_puntos;
     }
 }
